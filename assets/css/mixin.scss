@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+$btn-color: #187CEC; //按钮颜色
+$bg-color: #ffffff; // 页面背景颜色
+$font-color: #24345A!important; //字体颜色
+$img-activeColor: #fbf9f9; //点击图片的颜色
+$font-activeColor: #50a3ff; //点击字体连接的
+
+
+@mixin btn-activeColor { //按钮点击颜色
+    background-color: #2385f3 !important;
+    border-color: #2385f3!important;
+}
+
+@mixin div-borderBottom { //处理移动端列表底边线不是1px问题
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    border-bottom: 1px solid $font-color;
+    transform-origin: 0 100%;
+    transform: scaleY(0.5);
+    opacity: 0.1;
+}
+@mixin menu-borderBottom { //处理移动端列表底边线不是1px问题
+    transform-origin: 0 100%;
+    transform: scaleY(0.5);
+}
