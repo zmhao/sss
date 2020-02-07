@@ -5,19 +5,19 @@
       <div class="main-header">
         <div class="main-header-content">
           <div class="main-header-content-left">
-            <img @click="onPerson" :src="headSrc" alt="" />
+            <img @click="onPerson" :src="headSrc" alt />
           </div>
           <div class="main-header-content-center">{{ $t("Modern Pay") }}</div>
           <div class="main-header-content-right">
             <p class="main-header-content-right-scanning" @click="scanTrans">
-              <img src="../../assets/img/scanning@2x.png" alt="" />
+              <img src="../../assets/img/scanning@2x.png" alt />
             </p>
             <p
               @click="notification"
               class="main-header-content-right-message"
               :class="messageStatus ? 'redRoud' : ''"
             >
-              <img src="../../assets/img/prompt@2x.png" alt="" />
+              <img src="../../assets/img/prompt@2x.png" alt />
             </p>
           </div>
         </div>
@@ -30,15 +30,11 @@
               <div class="main-swipe-USD">
                 <div class="main-swipe-USD-box">
                   <div class="main-swipe-USD-box-left">
-                    <p class="main-swipe-USD-box-left-title">
-                      USD
-                    </p>
-                    <p class="main-swipe-USD-box-left-meney">
-                      {{ "$" + amount_usd }}
-                    </p>
+                    <p class="main-swipe-USD-box-left-title">USD</p>
+                    <p class="main-swipe-USD-box-left-meney">{{ "$" + amount_usd }}</p>
                   </div>
                   <div class="main-swipe-USD-box-right">
-                    <img src="../../assets/img/phone_login.png" alt="" />
+                    <img src="../../assets/img/phone_login.png" alt />
                   </div>
                 </div>
               </div>
@@ -47,15 +43,11 @@
               <div class="main-swipe-KHR">
                 <div class="main-swipe-KHR-box">
                   <div class="main-swipe-KHR-box-left">
-                    <p class="main-swipe-KHR-box-left-title">
-                      KHR
-                    </p>
-                    <p class="main-swipe-KHR-box-left-meney">
-                      {{ "៛" + amount_khr }}
-                    </p>
+                    <p class="main-swipe-KHR-box-left-title">KHR</p>
+                    <p class="main-swipe-KHR-box-left-meney">{{ "៛" + amount_khr }}</p>
                   </div>
                   <div class="main-swipe-KHR-box-right">
-                    <img src="../../assets/img/phone_login.png" alt="" />
+                    <img src="../../assets/img/phone_login.png" alt />
                   </div>
                 </div>
               </div>
@@ -73,7 +65,7 @@
             :key="index"
           >
             <!-- <router-link :to="item.path !"> -->
-            <img :src="item.img" alt="" />
+            <img :src="item.img" alt />
             <p>{{ $t(item.name) }}</p>
             <!-- </router-link> -->
           </div>
@@ -90,60 +82,35 @@
       <mt-popup v-model="popupVisible" position="left">
         <div class="popupwindows">
           <div class="popup-div">
-            <img
-              class="popup-div-img"
-              @click="onMessage"
-              :src="headSrc"
-              alt=""
-            />
+            <img class="popup-div-img" @click="onMessage" :src="headSrc" alt />
             <div class="popup-div-head">
               <p class="popup-div-head-title">{{ username }}</p>
-              <p class="popup-div-head-tips" @click="onMessage">
-                {{ $t("编辑个人资料") }}
-              </p>
+              <p class="popup-div-head-tips" @click="onMessage">{{ $t("编辑个人资料") }}</p>
             </div>
           </div>
           <div class="popup-menu">
             <div class="popup-menu-item" @click="coupon">
-              <img
-                class="popup-menu-item-img"
-                src="../../assets/img/menuCoupon@2x.png"
-              />
+              <img class="popup-menu-item-img" src="../../assets/img/menuCoupon@2x.png" />
               <p class="popup-menu-item-title">{{ $t("优惠券") }}</p>
             </div>
             <div class="popup-menu-item" @click="setting">
-              <img
-                class="popup-menu-item-img"
-                src="../../assets/img/menuSetting@2x.png"
-              />
+              <img class="popup-menu-item-img" src="../../assets/img/menuSetting@2x.png" />
               <p class="popup-menu-item-title">{{ $t("设置") }}</p>
             </div>
             <div class="popup-menu-item" @click="server">
-              <img
-                class="popup-menu-item-img"
-                src="../../assets/img/menuService@2x.png"
-              />
+              <img class="popup-menu-item-img" src="../../assets/img/menuService@2x.png" />
               <p class="popup-menu-item-title">{{ $t("服务网点") }}</p>
             </div>
             <div class="popup-menu-item" @click="help">
-              <img
-                class="popup-menu-item-img"
-                src="../../assets/img/menuHelp@2x.png"
-              />
+              <img class="popup-menu-item-img" src="../../assets/img/menuHelp@2x.png" />
               <p class="popup-menu-item-title">{{ $t("帮助") }}</p>
             </div>
             <div class="popup-menu-item" @click="about">
-              <img
-                class="popup-menu-item-img"
-                src="../../assets/img/menuAbout@2x.png"
-              />
+              <img class="popup-menu-item-img" src="../../assets/img/menuAbout@2x.png" />
               <p class="popup-menu-item-title">{{ $t("关于我们") }}</p>
             </div>
             <div class="popup-menu-item" @click="switchLang">
-              <img
-                class="popup-menu-item-img"
-                src="../../assets/img/menuLang@2x.png"
-              />
+              <img class="popup-menu-item-img" src="../../assets/img/menuLang@2x.png" />
 
               <p class="popup-menu-item-title">{{ $t("切换语言") }}</p>
             </div>
@@ -357,12 +324,12 @@ export default {
     // 扫码
     scanTrans() {
       let self = this;
-        // self.$router.replace({
-        //         name: "ScanTakeMoney",
-        //         query: {
-        //           code: "S.PJ1UplCxsGp8RV3nVeuzzIhCTQYszP5x"
-        //         }
-        //       });
+      // self.$router.replace({
+      //         name: "ScanTakeMoney",
+      //         query: {
+      //           code: "S.dl3lMm1RLd5qO5RXR6zXgs1AKYiGrpJQ"
+      //         }
+      //       });
       this.$router.push("/scan");
     },
     onPerson() {
@@ -411,7 +378,7 @@ export default {
           if (!d) {
             this.headSrc = storages.get(global.HEADPIC);
           }
-        })
+        });
       }
     }
   },

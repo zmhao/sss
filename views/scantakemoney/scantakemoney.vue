@@ -5,43 +5,26 @@
     </div>
     <div class="trans-content">
       <p class="trans-content-title">{{ $t("提现金额") }}</p>
-       <div
-        class="trans-content-inp"
-        :class="inpShow == false ? 'bottomBorderC' : 'bottomBorderB'">
+      <div class="trans-content-inp" :class="inpShow == false ? 'bottomBorderC' : 'bottomBorderB'">
         <div class="trans-content-inp-drop" @click="closeFun">
           <span
             :style="{ 'font-size': currencyName == '$' ? '24px' : '30px' }"
-            >{{ $t(currencyName) }}</span
-          >
-          <img src="../../assets/img/donw@2x.png" alt="" />
+          >{{ $t(currencyName) }}</span>
+          <img src="../../assets/img/donw@2x.png" alt />
         </div>
         <div class="trans-content-inp-box">
-          <p class="placeholder" @click="inputPsw" ref="inp">
-            {{ $t(inpPlaceholder) }}
-          </p>
-          <p
-            class="simulation-inp"
-            :class="inpShow == false ? '' : 'borderLfet'"
-          >
-            {{ moneyNuber }}
-          </p>
+          <p class="placeholder" @click="inputPsw" ref="inp">{{ $t(inpPlaceholder) }}</p>
+          <p class="simulation-inp" :class="inpShow == false ? '' : 'borderLfet'">{{ moneyNuber }}</p>
         </div>
       </div>
       <div class="trans-content-amount" @click="allTake()">
-        <p class="trans-content-amount-balance">
-          {{ $t("当前余额:") + balance + ", " }}
-        </p>
-        <p class="trans-content-amount-take"> &nbsp{{ $t("全部提现") }}</p>
+        <p class="trans-content-amount-balance">{{ $t("当前余额:") + balance + ", " }}</p>
+        <p class="trans-content-amount-take">&nbsp{{ $t("全部提现") }}</p>
       </div>
     </div>
 
     <div class="trans-btn">
-      <v-btn
-        btnText="确定"
-        :disabledVal="disableVal"
-        type="primary"
-        @btnSubmit="transSubmit"
-      ></v-btn>
+      <v-btn btnText="确定" :disabledVal="disableVal" type="primary" @btnSubmit="transSubmit"></v-btn>
     </div>
     <!-- 输入金额键盘 -->
     <div class="trans-keyboard" ref="keyboard">
@@ -56,7 +39,7 @@
       >
         <!-- 自定义支付动画 -->
         <div slot="loading-ani">
-          <svg></svg>
+          <svg />
         </div>
       </v-keyboard>
     </div>
@@ -74,17 +57,9 @@
       ></v-dialog>
     </div>
     <!-- 币种弹框 -->
-    <v-currency
-      :actions="currencyData"
-      :sheetVisible="mobileFlag"
-      @closeChange="transFun"
-    ></v-currency>
+    <v-currency :actions="currencyData" :sheetVisible="mobileFlag" @closeChange="transFun"></v-currency>
     <!-- 设置密码 -->
-    <v-settingPsw
-      :popupPsw="settingPswFlag"
-      @cancelFun="settingPswCancel"
-      @settingFun="succeeFun"
-    ></v-settingPsw>
+    <v-settingPsw :popupPsw="settingPswFlag" @cancelFun="settingPswCancel" @settingFun="succeeFun"></v-settingPsw>
   </div>
 </template>
 <script>
@@ -139,10 +114,10 @@ export default {
       diasabledInput: false, //输入框是否可选
       popdiasabke: false, //币种是否可选
       inpShow: false, //切换样式
-      inpPlaceholder: '请输入金额',
+      inpPlaceholder: "请输入金额",
       settingPswFlag: false,
-      psd:0,
-      isPoint:'.'
+      psd: 0,
+      isPoint: "."
     };
   },
   created() {
@@ -172,7 +147,7 @@ export default {
   },
   mounted() {
     let slef = this;
-    slef.oninput()
+    slef.oninput();
     slef.getBalance();
   },
   watch: {
@@ -241,7 +216,7 @@ export default {
       this.moneyNuber = "";
       this.inpPlaceholder = "请输入金额";
       this.isPoint = ".";
-      this.balance = this.amount_usd
+      this.balance = this.amount_usd;
     },
     // currencyFun2:选择其他币种
     currencyFun2() {
@@ -271,7 +246,7 @@ export default {
     allTake() {
       this.moneyNuber = this.balance;
       this.takeType = 2;
-      this.inpPlaceholder = ""
+      this.inpPlaceholder = "";
       // this.getReat();
     },
     // onAddressBook:打开通讯录
@@ -321,10 +296,16 @@ export default {
     },
     // transSubmit:转账事件
     transSubmit() {
+      var x = String(this.moneyNuber).indexOf(".") + 1; //小数点的位置
+      var y = String(this.moneyNuber).length - x; //小数的位数
+      if (y > 2) {
+        this.$toast("请输入正确的取款金额");
+        return;
+      }
       this.getReat();
     },
     getReat() {
-      let that =this
+      let that = this;
       if (that.moneyNuber == "") {
         that.$toast("请输入提现金额");
         return;
@@ -356,8 +337,8 @@ export default {
           ];
           that.modelVisible = true;
           that.transFer = dialogData;
-        }else{
-          that.settingPswFlag = true
+        } else {
+          that.settingPswFlag = true;
         }
       });
     },
@@ -368,17 +349,17 @@ export default {
     // 密码输入完毕
     enterPswFun(d) {
       let pwd = "";
-      let that = this
+      let that = this;
       for (let i = 0; i < d.length; i++) {
         pwd = pwd + "" + d[i];
       }
       let noStr = randomStr(16, false);
       let money = that.moneyNuber;
       if (that.currencyType === "usd") {
-        money = that.moneyNuber * 100;
+        money = money.toString().replace(".", "");
       }
-      if(this.balance != this.moneyNuber) {
-        this.takeType = 1
+      if (this.balance != this.moneyNuber) {
+        this.takeType = 1;
       }
       that.$loading();
       apiScanTakeMoney({
@@ -391,18 +372,18 @@ export default {
             sha1(pwd).toLocaleLowerCase() + PASSWORDSIGN
           ).toLocaleLowerCase() + noStr
         ).toLocaleLowerCase(),
-        non_str: noStr,
+        non_str: noStr
       }).then(res => {
         that.$loading.close();
         if (res.status == 200) {
           that.modelVisible = false;
           that.$router.replace({
-            path:'/transSucc',
+            path: "/transSucc",
             query: {
-              title: '提现',
-              text:"提现申请提交成功"
+              title: "提现",
+              text: "提现申请提交成功"
             }
-          })
+          });
         } else {
           that.$toast(res.msg);
           that.psd++;
